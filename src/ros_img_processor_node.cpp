@@ -17,7 +17,7 @@ const double GAUSSIAN_BLUR_SIGMA = 2;
 const double CANNY_EDGE_TH = 150;
 const double HOUGH_ACCUM_RESOLUTION = 2;
 const double MIN_CIRCLE_DIST = 40;
-const double HOUGH_ACCUM_TH = 90;
+const double HOUGH_ACCUM_TH = 80;
 const int MIN_RADIUS = 20;
 const int MAX_RADIUS = 100;
 
@@ -83,21 +83,14 @@ void RosImgProcessorNode::process()
         }
 
 		// find the direction vector
-
-    //Eigen::Matrix3d matr;
-    //matr << 0.0011991,0,-0.3740602,
-    //               0,0.0012006,-0.240471,
-    //               0,0,1;
-
-    //Eigen::Vector3d centro(cvRound(circles[0][0]),cvRound(circles[0][1]),1);
-    //direction_ << matr * centro; // just to draw something with the arrow marker
-
+    direction_ << center.x,center.y,1;  //drawing the center pixel
+    direction_ << matrixK_.inverse()*direction_; // Obtaining the projection after the intrinsic calibration
 
         // draw a bounding box around the ball
-        box.x = (cv_img_ptr_in_->image.cols/2)-10;
-        box.y = (cv_img_ptr_in_->image.rows/2)-10;
-        box.width = 20;
-        box.height = 20;
+        box.x = center.x-radius;
+        box.y = center.y-radius;
+        box.width = radius*2;
+        box.height = radius*2;
         cv::rectangle(cv_img_out_.image, box, cv::Scalar(0,255,255), 3);
     }
 
