@@ -11,7 +11,7 @@ $ roslaunch ros_img_processor ros_img_processor.launch
 Check your webcam encodings (yuyv,mjpeg,...) and set them accordingly at file launch/usb_camera.launch
 
 ## Perception Exercise
-A function to detect circles and show in the RVIZ the direction vector has been implemented. The images below show the different direction vector depending on the position of the detected circle.
+A function to detect circles and show the direction vector (in RVIZ) has been implemented. The images below show the different direction vectors depending on the position of the detected circles.
 
 ![alt text](https://github.com/LuisLechugaRuiz/ros_img_processor/blob/master/Photos/Photo1.png)
 
